@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AkilliTakipSistemi</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AkilliTakipSistemi.styles.css" asp-append-version="true" />
+    @{
+        List<string> renkler = ["cornflowerblue","coral","chartreuse"]; 
+        Random randomRenk = new Random();
+        string secilenrenk="white";
+        int index = randomRenk.Next(0,3);
+        secilenrenk = renkler[index];
+        
+    }
+    <style>
+        .navbar-brand:hover{
+            padding: 15px;
+            transition: 0.7s;
+            background-color: rgb(48, 128, 48);
+            color: white;
+        
+            
+            
+        }
+        .navbar-brand:defined{
+            transition: 0.7s;
+        }
+        a{
+             
+            font-family: fantasy;
+        }
+        .nav-link:hover{
+            transition: 0.7s;
+            color: white;
+            
+            
+            background-color: @secilenrenk;
+        }
+        .nav-link:defined{
+            transition: 0.7s;
+
+            
+        }
+
+        .nav-link,.navbar-brand{
+            border-radius: 10px;
+        }
+        
+    </style>
+</head>
+<body style="background-color: #212529;">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Zamanlı Not Kartları</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Note" asp-action="Index">Notlarım</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+</body>
+</html>

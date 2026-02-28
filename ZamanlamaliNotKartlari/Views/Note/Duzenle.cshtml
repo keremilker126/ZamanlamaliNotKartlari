@@ -1,0 +1,48 @@
+@model Note
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Yazdığın Notu Düzenle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Duzenle" asp-controller="Note" method="post">
+                        <div class="mb-3">
+                            <label for="Başlik" class="form-label font-weight-bold">Not Id :</label>
+                            <p>@Model.Id</p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Başlik" class="form-label font-weight-bold">Not Başlığı</label>
+                            <input type="text" class="form-control" id="Başlik" name="Başlik" placeholder="Başlık yazın..." value="@Model.Başlik" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Icerik" class="form-label">Not İçeriği</label>
+                            <textarea class="form-control" id="Icerik" name="Icerik" rows="4" placeholder="Notunuzu buraya yazın..." >@Model.Icerik</textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="NeZamanaKadar" class="form-label">Kayıt Tarihi</label>
+                                <p>@Model.KayitTarihi.ToString("dd/MM/yyyy/hh:mm:ss")</p>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="NeZamanaKadar" class="form-label">Bitiş Tarihi</label>
+                                <input type="datetime-local" class="form-control" id="NeZamanaKadar" name="NeZamanaKadar" value="@Model.NeZamanaKadar.ToString("dd/MM/yyyy/hh:mm:ss")">
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Notu Düzenle
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

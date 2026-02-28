@@ -1,0 +1,34 @@
+﻿@model List<Note>
+
+<a class="btn btn-success" asp-controller="Note" asp-action="Ekle">Yeni Note Ekle</a>
+<br>
+
+<div class="row">
+    @foreach (Note note in Model)
+    {
+        // Renk hesaplama işlemini burada, döngünün içinde yapıyoruz
+        string alacagirenk = "white";
+        string yazirenk = "white";
+        string verilecekmesaj="Oho Daha Çok Var";
+        var fark = note.NeZamanaKadar - note.KayitTarihi;
+        double topgun = fark.TotalDays;
+
+        if (topgun > 5) { alacagirenk = "#d4edda"; verilecekmesaj="Oho Daha Çok Var"; yazirenk="green";} // Hafif yeşil (Bootstrap success)
+        else if (topgun == 5) { alacagirenk = "#fff3cd";verilecekmesaj="Acaba İşi Yapmayaya Başlasan Mı?"; yazirenk="orange";} // Hafif sarı (Bootstrap warning)
+        else { alacagirenk = "#f8d7da"; verilecekmesaj="Durum Ciddi Şu Görevleri Yap Artık";yazirenk="red";} // Hafif kırmızı (Bootstrap danger)
+
+        <div class="card" style="width: 18rem; margin: 10px; background-color: @alacagirenk;">
+            <div class="card-body">
+                <h5 class="card-title">@note.Başlik</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                    @note.KayitTarihi.ToShortDateString() - @note.NeZamanaKadar.ToShortDateString()
+                </h6>
+                <p class="card-text">@note.Icerik</p>
+                
+                <a class="btn btn-danger btn-sm" asp-action="Sil" asp-controller="Note" asp-route-id="@note.Id">Sil</a>
+                <a class="btn btn-primary btn-sm" asp-action="Duzenle" asp-controller="Note" asp-route-id="@note.Id">Düzenle</a>
+            </div>
+            <p style="color:@yazirenk;">@verilecekmesaj</p>
+        </div>
+    }
+</div>
